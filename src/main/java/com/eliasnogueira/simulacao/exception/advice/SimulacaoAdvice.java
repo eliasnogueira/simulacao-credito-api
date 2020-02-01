@@ -15,7 +15,6 @@ public class SimulacaoAdvice {
     @ExceptionHandler(SimulacaoException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     MessageDTO simulacaoHandler(SimulacaoException e) {
-
         return new MessageDTO(e.toString());
     }
 }
