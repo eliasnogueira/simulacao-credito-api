@@ -19,20 +19,20 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).
-                tags(new Tag("Simulações", "Efetua operações de CRUD para simulações")).
-                genericModelSubstitutes(ListenableFuture.class).
-                useDefaultResponseMessages(false).
-                apiInfo(apiInfo()).
-                select().
-                apis(RequestHandlerSelectors.basePackage("com.eliasnogueira.simulacao.controller")).
-                paths(PathSelectors.any()).
-                build();
+            tags(new Tag("Simulações", "Efetua operações de CRUD para simulações")).
+            genericModelSubstitutes(ListenableFuture.class).
+            useDefaultResponseMessages(false).
+            apiInfo(apiInfo()).
+            select().
+            apis(RequestHandlerSelectors.basePackage("com.eliasnogueira.simulacao.controller")).
+            paths(PathSelectors.any()).
+            build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().
-                title("Simulação de Crédito").
-                description("Aplicação para simular a tomada de empréstimo").
-                build();
+            title("Simulação de Crédito").
+            description("Aplicação para simular a tomada de empréstimo").
+            build();
     }
 }
