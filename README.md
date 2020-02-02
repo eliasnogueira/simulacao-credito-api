@@ -18,12 +18,12 @@ Após ter efetuado o clone do projeto:
 ## Como alterar a porta padrão a porta
 A porta padrão é a `8089`.
 Se você dejesa alterar a porta padrão para alguma outra de sua escolha, execute o seguinte comando, substituindo
-o texto `<PORTA_DE_SUA_ESCOLHA>` para uma porta não utiliada:
+o texto `<PORTA_DE_SUA_ESCOLHA>` para uma porta não utilizada:
 ```
 mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=<PORTA_DE_SUA_ESCOLHA>
 ```
 
-## Como acessar a documentaçao (Swagger)
+## Como acessar a documentação (Swagger)
 Após ter iniciado a aplicação acesse o seguinte link: http://localhost:8089/swagger-ui.html
 
 # Quer ajudar?
