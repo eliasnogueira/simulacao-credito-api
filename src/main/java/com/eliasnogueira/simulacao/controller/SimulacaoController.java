@@ -69,15 +69,23 @@ public class SimulacaoController {
     @ApiOperation(value = "Retorna todas as simulações existentes")
     @ApiResponses({
         @ApiResponse(code = 200, message = "Simulações encontradas", response = SimulacaoDTO.class, responseContainer = "List"),
-        @ApiResponse(code = 204, message = "Nome não encontrado")
+        @ApiResponse(code = 404, message = "Nome não encontrado")
     })
     List<Simulacao> getSimulacao(@RequestParam(name = "nome", required = false) String nome) {
+        List<Simulacao> simulacoesEncontradas;
+
         Example<Simulacao> example =
             Example.of(Simulacao.builder().nome(nome).build(),
                 ExampleMatcher.matchingAny().
                     withMatcher("nome", ExampleMatcher.GenericPropertyMatchers.contains()));
 
-        return repository.findAll(example);
+        simulacoesEncontradas = repository.findAll(example);
+
+        if (simulacoesEncontradas.isEmpty()) {
+            throw new SimulacaoException("Nome não encontrado");
+        }
+
+        return simulacoesEncontradas;
     }
 
     @GetMapping("/api/v1/simulacoes/{cpf}")
