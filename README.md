@@ -26,22 +26,5 @@ mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=<PORTA_DE_SUA_ESCO
 ## Como acessar a documentaçao (Swagger)
 Após ter iniciado a aplicação acesse o seguinte link: http://localhost:8089/swagger-ui.html
 
-
-## Testes em ambiente simulando produção
-Esta mesma API está acessível através do seguinte link: https://simulacoes-api.herokuapp.com
-
-Recomendo fortemente que você não execute seus testes repetidamente neste ambiente, pelos seguintes motivos:
-* Você não terá o controle da massa dados do retorno de todas as simulação `GET /api/v1/simulacoes`
-   * pode ser que alguma outra pessoa tenha inserido mais simulações
-* Não é um ambiente controlado por você
-   * é uma simulação de um ambiente produtivo
-
-> **ATENÇÃO** 
-> Esta aplicação está hospedada no Heroku. Se ela não estiver sendo utilizada por um tempo
-> a mesma pode demorar até 30 segundos para responder a primeira requisição
-> 
-> Você pode conferir se a aplicação está respondendo através do seguinte endpoint
-> https://simulacoes-api.herokuapp.com/actuator/health
-
 # Quer ajudar?
 Por favor, leia o [Guia de Contribuição](CONTRIBUTING.md)
