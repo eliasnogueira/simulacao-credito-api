@@ -36,8 +36,6 @@ public class LoadDatabase {
 
     @Bean
     CommandLineRunner initDatabaseSimulacao(SimulacaoRepository simulacaoRepository) {
-        Simulacao.builder().cpf("").build();
-
         return args -> {
             simulacaoRepository.save(Simulacao.builder().cpf("66414919004").nome("Fulano").email("fulano@gmail.com")
                 .valor(new BigDecimal(11000)).parcelas(3).seguro(true).build());
