@@ -32,10 +32,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories
 @Log4j2
-public class SimulacaoApplication {
+public class Run {
 
     public static void main(String[] args) {
-        SpringApplication.run(SimulacaoApplication.class, args);
+        SpringApplication.run(Run.class, args);
         log.info("Aplicação iniciada! Ótimos testes!");
     }
 }
