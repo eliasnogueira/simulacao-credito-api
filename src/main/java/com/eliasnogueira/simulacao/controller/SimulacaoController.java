@@ -71,7 +71,7 @@ public class SimulacaoController {
         @ApiResponse(code = 200, message = "Simulações encontradas", response = SimulacaoDTO.class, responseContainer = "List"),
         @ApiResponse(code = 404, message = "Nome não encontrado")
     })
-    List<Simulacao> getSimulacao(@RequestParam(name = "nome", required = false) String nome) {
+    public List<Simulacao> getSimulacao(@RequestParam(name = "nome", required = false) String nome) {
         List<Simulacao> simulacoesEncontradas;
 
         Example<Simulacao> example =
@@ -94,7 +94,7 @@ public class SimulacaoController {
         @ApiResponse(code = 200, message = "Simulação encontrada", response = SimulacaoDTO.class),
         @ApiResponse(code = 404, message = "Simulação não encontrada", response = MessageDTO.class)
     })
-    ResponseEntity<Simulacao> one(@PathVariable String cpf) {
+    public ResponseEntity<Simulacao> one(@PathVariable String cpf) {
         return repository.findByCpf(cpf).
             map(simulacao -> ResponseEntity.ok().body(simulacao)).
             orElseThrow(() -> new SimulacaoException(MessageFormat.format(CPF_NAO_ENCONTRADO, cpf)));
@@ -108,7 +108,7 @@ public class SimulacaoController {
         @ApiResponse(code = 400, message = "Falta de informações", response = ValidacaoDTO.class),
         @ApiResponse(code = 409, message = "CPF já existente")
     })
-    Simulacao novaSimulacao(@Valid @RequestBody SimulacaoDTO simulacao) {
+    public Simulacao novaSimulacao(@Valid @RequestBody SimulacaoDTO simulacao) {
         return repository.save(new ModelMapper().map(simulacao, Simulacao.class));
     }
 
@@ -119,7 +119,7 @@ public class SimulacaoController {
         @ApiResponse(code = 404, message = "Simulação não encontrada", response = MessageDTO.class),
         @ApiResponse(code = 409, message = "CPF já existente")
     })
-    Simulacao atualizaSimulacao(@RequestBody SimulacaoDTO simulacao, @PathVariable String cpf) {
+    public Simulacao atualizaSimulacao(@RequestBody SimulacaoDTO simulacao, @PathVariable String cpf) {
         return update(new ModelMapper().
             map(simulacao, Simulacao.class), cpf).
             orElseThrow(() -> new SimulacaoException(MessageFormat.format(CPF_NAO_ENCONTRADO, cpf)));
@@ -132,7 +132,7 @@ public class SimulacaoController {
         @ApiResponse(code = 204, message = "Simulação removida com sucesso"),
         @ApiResponse(code = 404, message = "Simulação não encontrada", response = MessageDTO.class)
     })
-    void delete(@PathVariable String cpf) {
+    public void delete(@PathVariable String cpf) {
         if (repository.findByCpf(cpf).isEmpty()) {
             throw new SimulacaoException(MessageFormat.format(CPF_NAO_ENCONTRADO, cpf));
         } else {
