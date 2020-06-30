@@ -24,11 +24,22 @@
 
 package com.eliasnogueira.simulacao.entity;
 
-import lombok.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder(access = AccessLevel.PUBLIC)
@@ -36,7 +47,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(name = "cpf_unique", columnNames = "cpf")
+    @UniqueConstraint(name = "cpf_unique", columnNames = "cpf")
 })
 public class Simulacao {
 
