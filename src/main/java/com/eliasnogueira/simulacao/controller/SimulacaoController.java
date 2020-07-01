@@ -24,6 +24,9 @@
 
 package com.eliasnogueira.simulacao.controller;
 
+import com.eliasnogueira.simulacao.dto.service.v1.RestricaoDTO;
+import com.eliasnogueira.simulacao.exception.RestricaoException;
+import com.eliasnogueira.simulacao.service.RestricaoService;
 import com.eliasnogueira.simulacao.dto.MessageDTO;
 import com.eliasnogueira.simulacao.dto.SimulacaoDTO;
 import com.eliasnogueira.simulacao.dto.ValidacaoDTO;
@@ -60,9 +63,13 @@ public class SimulacaoController {
 
     private final SimulacaoRepository repository;
     private static final String CPF_NAO_ENCONTRADO = "CPF {0} não encontrado";
+    private static final String CPF_POSSUI_RESTRICAO = "CPF {0} possui restrição";
+    private final RestricaoService restricaoService;
 
-    public SimulacaoController(SimulacaoRepository repository) {
+    public SimulacaoController(SimulacaoRepository repository,
+        RestricaoService restricaoService) {
         this.repository = repository;
+        this.restricaoService = restricaoService;
     }
 
     @GetMapping("/api/v1/simulacoes")
@@ -105,10 +112,16 @@ public class SimulacaoController {
     @ApiOperation(value = "Insere uma nova simulação", code = 201)
     @ApiResponses({
         @ApiResponse(code = 201, message = "Simulação criada com sucesso", response = SimulacaoDTO.class),
-        @ApiResponse(code = 400, message = "Falta de informações", response = ValidacaoDTO.class),
-        @ApiResponse(code = 409, message = "CPF já existente")
+        @ApiResponse(code = 400, message = "CPF possui restrição", response = RestricaoDTO.class),
+        @ApiResponse(code = 409, message = "CPF já existente"),
+        @ApiResponse(code = 422, message = "Falta de informações", response = ValidacaoDTO.class),
+        @ApiResponse(code = 424, message = "Falha na conexão com API de Restrições")
     })
     public Simulacao novaSimulacao(@Valid @RequestBody SimulacaoDTO simulacao) {
+        if (restricaoService.possuiRestricao(simulacao.getCpf())) {
+            throw new RestricaoException(MessageFormat.format(CPF_POSSUI_RESTRICAO, simulacao.getCpf()));
+        }
+
         return repository.save(new ModelMapper().map(simulacao, Simulacao.class));
     }
 
@@ -120,6 +133,10 @@ public class SimulacaoController {
         @ApiResponse(code = 409, message = "CPF já existente")
     })
     public Simulacao atualizaSimulacao(@RequestBody SimulacaoDTO simulacao, @PathVariable String cpf) {
+        if (restricaoService.possuiRestricao(simulacao.getCpf())) {
+            throw new RestricaoException(MessageFormat.format(CPF_POSSUI_RESTRICAO, simulacao.getCpf()));
+        }
+
         return update(new ModelMapper().
             map(simulacao, Simulacao.class), cpf).
             orElseThrow(() -> new SimulacaoException(MessageFormat.format(CPF_NAO_ENCONTRADO, cpf)));
