@@ -32,6 +32,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.persistence.RollbackException;
@@ -59,6 +60,11 @@ public class ExceptionHandlingController extends ResponseEntityExceptionHandler 
         }
 
         return ResponseEntity.ok().build();
+    }
+
+    @ExceptionHandler({ResourceAccessException.class})
+    public ResponseEntity<Void> handleRestricoesServiceException() {
+        return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).build();
     }
 
     /**
