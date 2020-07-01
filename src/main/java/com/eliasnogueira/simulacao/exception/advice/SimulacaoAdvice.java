@@ -37,7 +37,7 @@ public class SimulacaoAdvice {
 
     @ResponseBody
     @ExceptionHandler(SimulacaoException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     MessageDTO simulacaoHandler(SimulacaoException e) {
         return new MessageDTO(e.toString());
     }
