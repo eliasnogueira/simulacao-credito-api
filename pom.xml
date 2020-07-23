@@ -6,11 +6,11 @@
 
     <groupId>com.eliasnogueira.simulacao</groupId>
     <artifactId>simulacao-credito</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
 
     <properties>
         <java.version>11</java.version>
-        <springfox.version>2.10.5</springfox.version>
+        <springfox.version>3.0.0</springfox.version>
         <modelmapper.version>2.3.8</modelmapper.version>
         <lombok.version>1.18.12</lombok.version>
         <hibernate-jpamodelgen.version>6.0.0.Alpha5</hibernate-jpamodelgen.version>
@@ -52,19 +52,7 @@
 
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-data-rest</artifactId>
+            <artifactId>springfox-boot-starter</artifactId>
             <version>${springfox.version}</version>
         </dependency>
 

@@ -24,7 +24,7 @@ mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=<PORTA_DE_SUA_ESCO
 ```
 
 ## Como acessar a documentação (Swagger)
-Após ter iniciado a aplicação acesse o seguinte link: http://localhost:8089/swagger-ui.html
+Após ter iniciado a aplicação acesse o seguinte link: http://localhost:8089/swagger-ui/index.html
 
 ## Dependência da API de Restrições
 Este projeto usa a [API de Restrições](https://github.com/eliasnogueira/restricao-credito-api) quando cria ou atualiza uma simulação, logo você precisá executar também 
