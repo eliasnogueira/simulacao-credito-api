@@ -33,6 +33,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -61,8 +62,11 @@ public class RestricaoService {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        final String uri = MessageFormat.format("{0}:{1}{2}/{3} ", baseUrl, port, endpoint, CPF);
-        return restTemplate.getForEntity(uri, Void.class, cpf)
-            .getStatusCode() == HttpStatus.OK;
+        final String uri = MessageFormat.format("{0}:{1}{2}/{3} ", baseUrl, port, endpoint, cpf);
+        try {
+            return restTemplate.getForEntity(uri, Void.class, cpf).getStatusCode() == HttpStatus.OK;
+        } catch (HttpClientErrorException.NotFound e) {
+            return false;
+        }
     }
 }
