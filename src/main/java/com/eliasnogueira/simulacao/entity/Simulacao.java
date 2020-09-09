@@ -24,6 +24,7 @@
 
 package com.eliasnogueira.simulacao.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,31 +52,39 @@ import lombok.NoArgsConstructor;
 })
 public class Simulacao {
 
+    @ApiModelProperty(hidden = true)
     @Id
     @GeneratedValue
     private Long id;
 
+    @ApiModelProperty(name = "Nome", position = 1, example = "João da Silva")
     @NotNull(message = "Nome não pode ser vazio")
     private String nome;
 
+    @ApiModelProperty(name = "CPF", position = 2, example = "9709323014")
     @NotNull(message = "CPF não pode ser vazio")
     private String cpf;
 
+    @ApiModelProperty(name = "Email", position = 3, example = "joao@gmail.com")
     @NotNull(message = "E-mail não deve ser vazio")
     @Email
     @Pattern(regexp = ".+@.+\\.[a-z]+", message = "E-mail deve ser um e-mail válido")
     private String email;
 
+    @ApiModelProperty(name = "Valor", position = 4, example = "1200")
     @NotNull(message = "Valor não pode ser vazio")
     @Min(value = 1000, message = "Valor deve ser igual ou maior a R$ 1.000")
     @Max(value = 40000, message = "Valor deve ser menor ou igual a R$ 40.000")
     private BigDecimal valor;
 
+    @ApiModelProperty(name = "Valor", position = 5, example = "3")
     @NotNull(message = "Parcelas não pode ser vazio")
     @Min(value = 2, message = "Parcelas deve ser igual ou maior que 2")
     @Max(value = 48, message = "Parcelas deve ser menor ou igual a 48")
     private Integer parcelas;
 
+
+    @ApiModelProperty(name = "Seguro", position = 5, example = "true")
     @NotNull(message = "Uma das opções de Seguro devem ser selecionadas")
     private Boolean seguro;
 }
