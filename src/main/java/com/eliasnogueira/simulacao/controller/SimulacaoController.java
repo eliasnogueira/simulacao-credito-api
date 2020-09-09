@@ -76,7 +76,7 @@ public class SimulacaoController {
     @ApiOperation(value = "Retorna todas as simulações existentes")
     @ApiResponses({
         @ApiResponse(code = 200, message = "Simulações encontradas", response = SimulacaoDTO.class, responseContainer = "List"),
-        @ApiResponse(code = 404, message = "Nome não encontrado")
+        @ApiResponse(code = 404, message = "Simulação não encontrada")
     })
     public List<Simulacao> getSimulacao(@RequestParam(name = "nome", required = false) String nome) {
         List<Simulacao> simulacoesEncontradas;
@@ -88,9 +88,7 @@ public class SimulacaoController {
 
         simulacoesEncontradas = repository.findAll(example);
 
-        if (simulacoesEncontradas.isEmpty()) {
-            throw new SimulacaoException("Nome não encontrado");
-        }
+        if (simulacoesEncontradas.isEmpty()) throw new SimulacaoException("Simulação não encontrada");
 
         return simulacoesEncontradas;
     }
