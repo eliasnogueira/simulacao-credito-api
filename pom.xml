@@ -13,7 +13,7 @@
 
     <groupId>com.eliasnogueira.simulacao</groupId>
     <artifactId>simulacao-credito</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.3-SNAPSHOT</version>
 
     <properties>
         <java.version>11</java.version>
